@@ -2,15 +2,15 @@
 
 #include <imgui.h>
 
-#include <plugin_template.hpp>
+#include <bogus_particles.hpp>
 
 #include <memory>
 #include <limits>
 #include <iostream>
 
-static std::unique_ptr<PluginTemplate> g_plugin_template = nullptr;
+static std::unique_ptr<BogusParticles> g_bogus_particles = nullptr;
 
-constexpr const char* plugin_name = "PluginTemplate";
+constexpr const char* plugin_name = "BogusParticles";
 
 extern "C" {
 
@@ -40,10 +40,10 @@ SOLANA_PLUGIN_EXPORT uint32_t solana_plugin_start(struct SolanaAPI* solana_api) 
 
 		// static store, could be anywhere tho
 		// construct with fetched dependencies
-		g_plugin_template = std::make_unique<PluginTemplate>();
+		g_bogus_particles = std::make_unique<BogusParticles>();
 
 		// register your api, if you have it
-		PLUG_PROVIDE_INSTANCE(PluginTemplate, plugin_name, g_plugin_template.get());
+		PLUG_PROVIDE_INSTANCE(BogusParticles, plugin_name, g_bogus_particles.get());
 	} catch (const ResolveException& e) {
 		std::cerr << "PLUGIN " << plugin_name << " " << e.what << "\n";
 		return 2;
@@ -55,7 +55,7 @@ SOLANA_PLUGIN_EXPORT uint32_t solana_plugin_start(struct SolanaAPI* solana_api) 
 SOLANA_PLUGIN_EXPORT void solana_plugin_stop(void) {
 	std::cout << "PLUGIN " << plugin_name << " STOP()\n";
 
-	g_plugin_template.reset();
+	g_bogus_particles.reset();
 }
 
 SOLANA_PLUGIN_EXPORT float solana_plugin_tick(float delta) {
@@ -63,7 +63,7 @@ SOLANA_PLUGIN_EXPORT float solana_plugin_tick(float delta) {
 }
 
 SOLANA_PLUGIN_EXPORT float solana_plugin_render(float delta) {
-	return g_plugin_template->render(delta);
+	return g_bogus_particles->render(delta);
 }
 
 } // extern C

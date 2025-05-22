@@ -1,24 +1,25 @@
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 
 # TEMPLATE: search and rename every mention of:
-# - solanaceae_plugin_template
-# - plugin_template
-# - PLUGIN_TEMPLATE
-# - PluginTemplate
+# - bogus_particles
+# - bogus_particles
+# - BOGUS_PARTICLES
+# - BOGUS_PARTICLES
+# - BogusParticles
 
 # cmake setup begin
-project(solanaceae_plugin_template)
+project(bogus_particles)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-	set(SOLANACEAE_PLUGIN_TEMPLATE_STANDALONE ON)
+	set(BOGUS_PARTICLES_STANDALONE ON)
 else()
-	set(SOLANACEAE_PLUGIN_TEMPLATE_STANDALONE OFF)
+	set(BOGUS_PARTICLES_STANDALONE OFF)
 endif()
-message("II SOLANACEAE_PLUGIN_TEMPLATE_STANDALONE " ${SOLANACEAE_PLUGIN_TEMPLATE_STANDALONE})
+message("II BOGUS_PARTICLES_STANDALONE " ${BOGUS_PARTICLES_STANDALONE})
 
-option(SOLANACEAE_PLUGIN_TEMPLATE_BUILD_PLUGINS "Build the plugin_template plugins" ${SOLANACEAE_PLUGIN_TEMPLATE_STANDALONE})
+option(BOGUS_PARTICLES_BUILD_PLUGINS "Build the bogus_particles plugins" ${BOGUS_PARTICLES_STANDALONE})
 
-if (SOLANACEAE_PLUGIN_TEMPLATE_STANDALONE)
+if (BOGUS_PARTICLES_STANDALONE)
 	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 	# defaulting to debug mode, if not specified
@@ -38,7 +39,7 @@ endif()
 # external libs
 add_subdirectory(./external EXCLUDE_FROM_ALL) # before increasing warn levels, sad :(
 
-if (SOLANACEAE_PLUGIN_TEMPLATE_STANDALONE)
+if (BOGUS_PARTICLES_STANDALONE)
 	set(CMAKE_CXX_EXTENSIONS OFF)
 
 	# bump up warning levels appropriately for clang, gcc & msvc
@@ -70,7 +71,7 @@ endif()
 
 add_subdirectory(./src)
 
-if (SOLANACEAE_PLUGIN_TEMPLATE_BUILD_PLUGINS)
+if (BOGUS_PARTICLES_BUILD_PLUGINS)
 	add_subdirectory(./plugins)
 endif()
 
